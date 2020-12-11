@@ -83,7 +83,7 @@ do
         fi
       else
         echo "# Test - folgende zfs destroys würden ausgführt"
-        echo "$SNAPS" | head -n $DELSNAPS | xargs -n 1 zfs get creation -H 
+        echo "$SNAPS" | head -n $DELSNAPS | xargs -n 1 zfs get -H creation 
         echo "$SNAPS" | head -n $DELSNAPS | xargs -n 1 echo ">>" zfs destroy -v 
       fi
   fi
