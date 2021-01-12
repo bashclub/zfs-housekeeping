@@ -16,9 +16,9 @@ FILTER="$2"
 # Wieviele behalten 
 BEHALTE="$3"
 
-[ $BEHALTE -gt 0 ] 2>/dev/null
+[ $BEHALTE -ge 0 ] 2>/dev/null
 if [ "$?" != "0" ] 
-then	
+then
  echo "Parameter 3 keine pos. Zahl"
  echo "$AUFRUF"
  exit 0
@@ -40,9 +40,9 @@ do
 
   if [ "$MUSTER" = "" ]
   then
-    SNAPS=$(zfs list -t snap -H -o name -s creation "${DATASET}")
+    SNAPS=$(zfs list -r -t snap -H -o name -s creation|grep "${DATASET}@")
   else
-    SNAPS=$(zfs list -t snap -H -o name -s creation "${DATASET}"|grep $MUSTER)
+    SNAPS=$(zfs list -r -t snap -H -o name -s creation|grep "${DATASET}@"|grep $MUSTER)
   fi
   ANZSNAPS=$(echo $SNAPS|wc -w)
 
@@ -77,9 +77,9 @@ do
         echo "# Liste nach zfs destroy"
         if [ "$MUSTER" = "" ]
         then
-          zfs list -t snap -o name -s creation "${DATASET}"
+          zfs list -r -t snap -o name -s creation|grep "${DATASET}@"
         else
-          zfs list -t snap -o name -s creation "${DATASET}"|grep $MUSTER
+          zfs list -r -t snap -o name -s creation|grep "${DATASET}@"|grep $MUSTER
         fi
       else
         echo "# Test - folgende zfs destroys würden ausgführt"
