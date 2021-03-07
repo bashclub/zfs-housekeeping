@@ -92,7 +92,7 @@ do
   else
     SNAPS=$(zfs list -r -t snap -H -o name -s creation | grep "${DATASET}@" | grep $MUSTER)
   fi
-  ANZSNAPS=$(echo "$SNAPS"|wc -l|sed 's, ,,g')
+  ANZSNAPS=$(echo "$SNAPS"|grep -v "^$"|wc -l|sed 's, ,,g')
 
   echo "# Anzahl Snaps: $ANZSNAPS"
   if [ "$KFLAG" = "1" ]
