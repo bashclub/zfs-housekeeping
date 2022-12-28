@@ -1,10 +1,5 @@
 # zfs-keep-and-clean
 
-## Script sts23.sh
-### Aufruf:
-Aufruf: ./sts23.sh <test|echt> <Poolfilter> <Anz. Behalte> [Snapshotfilter]
-
-
 ## Script cleansnaps.sh (neu)
 Snapshots nach Datasets und Muster im Snapshotnamen filtern und ggf. löschen.
 Es können alle bis auf die letzten x Snapshots behalten werden (-k keep).
