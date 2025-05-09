@@ -88,9 +88,9 @@ do
 
   if [ "$MUSTER" = "" ]
   then
-    SNAPS=$(zfs list -r -t snap -H -o name -s creation | grep "${DATASET}@")
+    SNAPS=$(zfs list -t snap -H -o name -s creation ${DATASET})
   else
-    SNAPS=$(zfs list -r -t snap -H -o name -s creation | grep "${DATASET}@" | grep $MUSTER)
+    SNAPS=$(zfs list -t snap -H -o name -s creation ${DATASET} | grep $MUSTER)
   fi
   ANZSNAPS=$(echo "$SNAPS"|grep -v "^$"|wc -l|sed 's, ,,g')
 
@@ -149,9 +149,9 @@ do
         echo "% Liste nach zfs destroy:"
         if [ "$MUSTER" = "" ]
         then
-          zfs list -r -t snap -o name -s creation | grep "${DATASET}@" | sed 's/^/  + /' 
+          zfs list -t snap -o name -s creation ${DATASET} | sed 's/^/  + /' 
         else
-          zfs list -r -t snap -o name -s creation | grep "${DATASET}@" | grep $MUSTER | sed 's/^/  + /'
+          zfs list -t snap -o name -s creation ${DATASET} | grep $MUSTER | sed 's/^/  + /'
         fi
       else
         echo "% Es wurden keine Snapshots gelöscht"
